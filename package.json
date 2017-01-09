@@ -1,0 +1,20 @@
+{
+  "name": "webpack-dll-bundles-plugin",
+  "version": "1.0.0-beta.0",
+  "description": "A Webpack plugin for bundling group of packages as DLLs",
+  "main": "index.js",
+  "typings": "index.d.ts",
+  "author": "Shlomi Assaf <shlomiasaf@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^6.0.58",
+    "@types/webpack": "^2.1.0",
+    "typescript": "2.0.10"
+  },
+  "dependencies": {
+    "find-root": "^1.0.0"
+  },
+  "peerDependencies": {
+    "webpack": "2.2.0-rc.3"
+  }
+}
