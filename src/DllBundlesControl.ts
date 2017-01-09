@@ -151,12 +151,22 @@ export class DllBundlesControl {
         };
 
         const bundleState = this.getBundleSate();
+        const pkgCache = {
+          del: (pkgInfo: PackageInfo) =>  {
+            delete bundleState[pkgInfo.name];
+            pkgCache.hist.push(pkgInfo.name);
+          },
+          deleted: (pkgInfo: PackageInfo) =>  pkgCache.hist.indexOf(pkgInfo.name) > -1,
+          hist: []
+        };
+
+
         // compare to the bundle state, i.e: the last state known
         // we have 4 possible outcomes for each package: No change, version change, added, removed.
         packages.forEach( pkgInfo => {
           if (pkgInfo.error) {
             result.error.push(pkgInfo);
-            delete bundleState[pkgInfo.name];
+            pkgCache.del(pkgInfo);
           } else if (bundleState.hasOwnProperty(pkgInfo.name)) { // if the old sate has this package:
             if (bundleState[pkgInfo.name].version === pkgInfo.version) {
               result.current.push(pkgInfo);
@@ -165,10 +175,15 @@ export class DllBundlesControl {
             }
             // we delete it from the bundle list so at the end we have a bundle state that
             // has packages that were removed
-            delete bundleState[pkgInfo.name];
-          } else {
-            // old package didn't have this package, its new (added)
-            result.added.push(pkgInfo);
+            pkgCache.del(pkgInfo);
+          } else { // old package didn't have this package, its new (added)
+            if (!pkgCache.deleted(pkgInfo)) {
+              // first we check if it wasn't deleted in previous loop
+              // this is when 2 names for different paths are set
+              // it can happen if the main file is not importing all parts of the package.
+              result.added.push(pkgInfo);
+            }
+
           }
         });
 
