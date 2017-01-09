@@ -53,5 +53,6 @@ Currently, the file name templates for dll's is locked, you can get a projected 
 
 ## TODO
   - Watch files/package.json for changes and rebuild
+  - Move package resolution to webpack (now using node require)
   - Allow setting the template for file names.
   - Documentation
