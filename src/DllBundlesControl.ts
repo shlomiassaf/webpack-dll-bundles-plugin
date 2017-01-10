@@ -1,4 +1,5 @@
 const findRoot = require('find-root');
+const jsonfile = require('jsonfile');
 import * as Path from 'path';
 import * as fs from 'fs';
 
@@ -202,7 +203,7 @@ export class DllBundlesControl {
    */
   private getBundleSate(): BundleState {
     if (fs.existsSync(Path.join(this.options.dllDir, BUNDLE_STATE_FILENAME))) {
-      return <any>require(Path.join(this.options.dllDir, BUNDLE_STATE_FILENAME));
+      return <any>jsonfile.readFileSync(Path.join(this.options.dllDir, BUNDLE_STATE_FILENAME));
     } else {
       return {} as any;
     }

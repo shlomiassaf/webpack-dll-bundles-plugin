@@ -1,6 +1,6 @@
 {
   "name": "webpack-dll-bundles-plugin",
-  "version": "1.0.0-beta.1",
+  "version": "1.0.0-beta.2",
   "description": "A Webpack plugin for bundling group of packages as DLLs",
   "main": "index.js",
   "typings": "index.d.ts",
@@ -12,7 +12,8 @@
     "typescript": "2.0.10"
   },
   "dependencies": {
-    "find-root": "^1.0.0"
+    "find-root": "^1.0.0",
+    "jsonfile": "^2.4.0"
   },
   "peerDependencies": {
     "webpack": "2.2.0-rc.3"
