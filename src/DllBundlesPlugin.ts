@@ -21,7 +21,7 @@ export class DllBundlesPlugin {
     this.compiler = compiler;
 
     const newPlugins = this.bundles.map( b => new DllReferencePlugin({
-        context: '.',
+        context: this.options.context,
         manifest: Path.join(this.options.dllDir, `${b.name}-manifest.json`)
       }));
 
@@ -41,7 +41,6 @@ export class DllBundlesPlugin {
           return console.info('DLL: All DLLs are valid.');
         } else {
           console.info('DLL: Rebuilding...');
-
 
           const newEntry = this.bundles.reduce( (prev, curr) => {
             prev[curr.name] = curr.packages.map( p => typeof p === 'string' ? p : p.path );
@@ -77,9 +76,19 @@ export class DllBundlesPlugin {
 
   private setOptions(options: DllBundlesPluginOptions): void {
     this.options = Object.assign({}, options);
-    if (!Path.isAbsolute(this.options.dllDir)) {
-      this.options.dllDir = Path.resolve(process.cwd(), this.options.dllDir);
+
+    if (this.options.context) {
+      this.options.context = process.cwd();
     }
+
+    if (!Path.isAbsolute(this.options.context)) {
+      throw new Error('Context must be an absolute path');
+    }
+
+    if (!Path.isAbsolute(this.options.dllDir)) {
+      this.options.dllDir = Path.resolve(this.options.context, this.options.dllDir);
+    }
+
     const bundles = this.options.bundles;
     this.bundles = Object.keys(bundles).map( k => ({ name: k, packages: bundles[k] }) );
 
