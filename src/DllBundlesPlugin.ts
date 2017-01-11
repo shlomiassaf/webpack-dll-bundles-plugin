@@ -77,7 +77,7 @@ export class DllBundlesPlugin {
   private setOptions(options: DllBundlesPluginOptions): void {
     this.options = Object.assign({}, options);
 
-    if (this.options.context) {
+    if (!this.options.context) {
       this.options.context = process.cwd();
     }
 
