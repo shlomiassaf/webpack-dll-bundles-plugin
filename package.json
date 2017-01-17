@@ -15,7 +15,11 @@
     "find-root": "^1.0.0",
     "jsonfile": "^2.4.0"
   },
-  "peerDependencies": {
-    "webpack": "2.2.0-rc.3"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shlomiassaf/webpack-dll-bundles-plugin.git"
+  },
+  "bugs": {
+    "url": "https://github.com/shlomiassaf/webpack-dll-bundles-plugin/issues"
   }
 }
