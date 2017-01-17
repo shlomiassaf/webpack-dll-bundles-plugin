@@ -52,4 +52,14 @@ export interface DllBundlesPluginOptions {
    * @default false
    */
   ignorePackageError?: boolean
+
+  /**
+   * The context for the plugin.
+   *
+   * Used as context for internal plugins, e.g: DllReferencePlugin
+   * Used as context for dllDir (if relative)
+   *
+   * @default process.cwd()
+   */
+  context?: string;
 }
