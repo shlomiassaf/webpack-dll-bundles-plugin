@@ -1,6 +1,6 @@
 {
   "name": "webpack-dll-bundles-plugin",
-  "version": "1.0.0-beta.4",
+  "version": "1.0.0-beta.5",
   "description": "A Webpack plugin for bundling group of packages as DLLs",
   "main": "index.js",
   "typings": "index.d.ts",
