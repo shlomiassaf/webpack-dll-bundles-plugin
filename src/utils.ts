@@ -6,11 +6,11 @@ export type Stats = webpack.compiler.Stats;
 
 export function resolveConfig(config: any): any {
   if(typeof config === 'string') {
-    return this.resolveConfig(require(config));
+    return resolveConfig(require(config));
   } else if (typeof config === 'function') {
     return config();
   } else if (config.__esModule === true && !!config.default) {
-    return this.resolveConfig(config.default);
+    return resolveConfig(config.default);
   } else {
     return config;
   }
